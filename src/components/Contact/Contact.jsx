@@ -1,14 +1,13 @@
 import { IoPerson } from 'react-icons/io5';
 import { FaPhoneAlt } from 'react-icons/fa';
-import css from "./Contact.module.css"
+import css from './Contact.module.css';
 
 export default function Contact({ item, onDelete }) {
-  const {id, name, number } = item;
+  const { id, name, number } = item;
 
-  const handleClick =(event)=>{
-    onDelete (event.target.value)
-console.log(event.target.value)
-  }
+  const handleClick = event => {
+    onDelete(event.target.value);
+  };
 
   return (
     <>
@@ -22,7 +21,9 @@ console.log(event.target.value)
           <p>{number}</p>
         </div>
       </div>
-      <button type="button" onClick={handleClick} value ={id}>Delete</button>
+      <button type="button" onClick={handleClick} value={id}>
+        Delete
+      </button>
     </>
   );
 }
