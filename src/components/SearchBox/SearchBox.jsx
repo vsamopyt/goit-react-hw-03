@@ -11,7 +11,7 @@ const handleFilter =(event) =>{
   }
   return (
     <div className={css.searchBoxWraper}>
-      <label htmlFor={searchBoxId}>Search for Contacts</label>
+      <label className ={css.searchBoxLabel} htmlFor={searchBoxId}>Find contact by name</label>
       <input className={css.serchBoxInput} type="text" name="searchBoxId" id={searchBoxId} value ={value} onChange ={handleFilter}/>
     </div>
   );

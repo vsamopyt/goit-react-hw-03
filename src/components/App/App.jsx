@@ -4,23 +4,60 @@ import SearchBox from "../SearchBox/SearchBox"
 import ContactForm from "../ContactForm/ContactForm"
 import { useState } from 'react'
 
-import './App.css'
+import css from './App.module.css'
 
 function App() {
+
   const[filter, setFilter] = useState("")
-  const [contacts, setContacts] = useState(initialContacts)
-  console.log(filter);
+  // const [contacts, setContacts] = useState(initialContacts)
+    const [contacts, setContacts] = useState(()=>{
+      const localStorageData = JSON.parse(localStorage.getItem("contacts"));
+      console.log(localStorageData);
+      if(localStorageData !== null) {
+        console.log(1);
+        return localStorageData;
+      }
+      else { console.log(2); return initialContacts}
+      
+     })
+      
+  
+
+  // console.log(contacts);
+
+ const addContact =(newContact)=>{
+  setContacts((prevContacts) =>{ return [...prevContacts,newContact]})}
+  
+
+  const deleteContact =(id)=>{
+    setContacts((prevContacts) =>{  return prevContacts.filter(item=>item.id !== id )})}
+ 
+
+
+ 
+
+
+
+
+ 
+
+//  addContact{id:20, name: "mmmmmm", number: "1111111"})
+  // console.log(filter);
 
   const filteredContacts = contacts.filter(item => {
     return item.name.toLowerCase().includes(filter.toLowerCase())
   })
+  localStorage.setItem("contacts",JSON.stringify(contacts))
  
   return (
-    <>
-    <ContactForm />
+    <div className={css.appWraper}>
+     <h1 className={css.appTitle}>Phonebook</h1>
+    <ContactForm onAdd={addContact}/>
     <SearchBox value={filter} onFilter ={setFilter}/>
-    <ContactList array = {filteredContacts} />
-    </>
+    <ContactList array = {filteredContacts} 
+    onDelete = {deleteContact}
+    />
+    </div>
   )
 }
 
